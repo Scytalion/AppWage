@@ -240,17 +240,18 @@ static NSMutableArray * accounts = nil;
     {
         NSPredicate * filterPredicate = [NSPredicate predicateWithFormat: @"%K =[cd] %@",
                                          @"accountInternalId", accountDetails.accountInternalId];
-
-        NSDictionary * existingAccount = [accounts filteredArrayUsingPredicate: filterPredicate][0];
-
-        // Remove our account
-        [accounts removeObject: existingAccount];
-
+        
+        if ([accounts count] > 0)
+        {
+            NSDictionary * existingAccount = [accounts filteredArrayUsingPredicate: filterPredicate][0];
+            [accounts removeObject: existingAccount];
+        }
+        
         accountDetails.modified = NO;
-
+        
         // Add the new account
         [accounts addObject: accountDetails];
-
+        
         // Save the keychain
         [[FXKeychain defaultKeychain] setObject: accounts
                                          forKey: kAccountsEntry];
