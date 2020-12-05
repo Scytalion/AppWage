@@ -50,9 +50,6 @@
 
 #import "AWInitialSetupWizard.h"
 
-#import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
-
 @interface AppDelegate()<AWApplicationListTreeViewControllerProtocol, NSSplitViewDelegate, NSUserNotificationCenterDelegate, NSWindowDelegate, AWWindowAllowDropDelegate>
 {
     DDFileLogger                                * fileLogger;
@@ -163,8 +160,6 @@
 - (void) applicationDidFinishLaunching: (NSNotification *) aNotification
 {
     [[NSUserDefaults standardUserDefaults] registerDefaults: @{ @"NSApplicationCrashOnExceptions": @YES }];
-
-    [Fabric with:@[[Crashlytics class]]];
 
     [[AWSQLiteHelper rankingDatabaseQueue] inDatabase: ^(FMDatabase * database) {
         NSLog(@"Rating database initialized.");

@@ -15,9 +15,6 @@ target :AppWage do
   pod 'CHCSVParser'
   pod 'CocoaHTTPServer'
   pod 'LVDebounce'
-
-  pod 'Fabric'
-  pod 'Crashlytics'
 end
 
 target :iTunesCollectionService do
